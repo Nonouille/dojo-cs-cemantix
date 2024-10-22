@@ -10,7 +10,11 @@ import {GuessWord} from "../model/guessWord.model";
 export class ApiClientService {
   private httpClient = inject(HttpClient);
 
+  public getSimilarity(guess: GuessWord): Observable<ResponseWord>{
+    return this.httpClient.get<ResponseWord>(`https://nonouille-devdojo2-12.deno.dev/?word=${guess.value}`)
+  }
+
   public getPokemonValue(guess: GuessWord): Observable<ResponseWord>{
-    return this.httpClient.get<ResponseWord>(`https://pokeapi.co/api/v2/pokemon/${guess}`)
+    return this.httpClient.get<ResponseWord>(`https://pokeapi.co/api/v2/pokemon/${guess.value}`)
   }
 }
