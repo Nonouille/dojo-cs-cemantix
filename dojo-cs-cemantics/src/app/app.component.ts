@@ -25,7 +25,7 @@ export class AppComponent {
 
   sendMyGuess() {
     this.myResultDistance = 45
-    this.apiClient.getPokemonValue({
+    this.apiClient.getSimilarity({
       value: this.myGuess
     }).pipe(
       catchError(err => {
@@ -33,9 +33,11 @@ export class AppComponent {
         this.hasError = true;
         return EMPTY
       })
-    ).subscribe(result=> {
+    ).subscribe(response=> {
+      console.log(response);
+      const toto = response.result;
       this.hasError = false;
-      this.myResultDistance = result.value
+      this.myResultDistance = toto*100;
     });
   }
 }
